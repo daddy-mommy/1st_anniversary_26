@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#160b16">
+<meta name="description" content="Pattu Kutti — 365 Days of Us. A first anniversary love story.">
+<title>Pattu Kutti ❤️ — 365 Days of Us</title>
+<style>
+:root{
+  --bg:#120912; --panel:rgba(255,255,255,.08); --text:#fff7fb;
+  --muted:#d9bdcc; --accent:#ff6f9f; --accent2:#ffd3e1;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at top,#32162b 0,#160b16 48%,#090509 100%);color:var(--text);font-family:Georgia,"Times New Roman",serif}
+body{overflow-x:hidden}
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.heart{position:absolute;bottom:-30px;font-size:18px;opacity:0;animation:floatUp linear forwards}
+@keyframes floatUp{0%{transform:translateY(0) scale(.7) rotate(0);opacity:0}10%{opacity:.7}100%{transform:translateY(-110vh) scale(1.35) rotate(25deg);opacity:0}}
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:28px;position:relative;z-index:1}
+.hero-card{max-width:780px;padding:46px 28px;border:1px solid rgba(255,255,255,.15);border-radius:30px;background:rgba(20,7,18,.58);box-shadow:0 25px 80px rgba(0,0,0,.45);backdrop-filter:blur(10px)}
+.kicker{letter-spacing:5px;text-transform:uppercase;color:var(--accent2);font:600 12px system-ui,sans-serif}
+h1{font-size:clamp(46px,10vw,92px);line-height:.95;margin:18px 0 12px;text-shadow:0 10px 40px rgba(255,80,140,.25)}
+.hero p{font-size:clamp(18px,4vw,25px);color:var(--muted);line-height:1.6}
+.date{margin:24px 0;color:#fff;font:600 15px system-ui,sans-serif;letter-spacing:2px}
+.btn{border:0;border-radius:999px;padding:14px 24px;background:linear-gradient(135deg,#ff6f9f,#d94379);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 12px 30px rgba(217,67,121,.25);font-size:15px}
+.btn.secondary{background:rgba(255,255,255,.1);box-shadow:none}
+.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+#story{display:none;position:relative;z-index:2;max-width:1000px;margin:auto;padding:26px 16px 80px}
+.topbar{position:sticky;top:0;z-index:10;padding:12px 0 14px;background:linear-gradient(to bottom,rgba(18,9,18,.98),rgba(18,9,18,.78),transparent);backdrop-filter:blur(7px)}
+.progress{height:5px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff6f9f,#ffd3e1);transition:width .4s}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.counter{font:600 12px system-ui,sans-serif;color:var(--muted);letter-spacing:1px}
+.chapter{display:none;animation:fade .5s ease}
+.chapter.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.chapter-title{font-size:clamp(30px,7vw,55px);text-align:center;margin:30px 0 20px}
+.story-card{background:var(--panel);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:clamp(20px,5vw,42px);box-shadow:0 18px 60px rgba(0,0,0,.22)}
+.story-card img{max-width:100%;border-radius:18px}
+.story-card p,.story-card div{line-height:1.85}
+.photo-slot{min-height:160px;border:1px dashed rgba(255,211,225,.45);border-radius:18px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);margin:20px 0;padding:25px;background:rgba(255,255,255,.03);font:500 14px system-ui,sans-serif}
+.final{text-align:center;padding:70px 20px}
+.final h2{font-size:clamp(40px,9vw,76px);margin:10px 0}
+.final p{font-size:22px;line-height:1.7;color:var(--muted)}
+.small{font:500 12px system-ui,sans-serif;color:var(--muted)}
+@media(max-width:600px){
+ .hero-card{padding:36px 20px;border-radius:24px}
+ #story{padding-left:11px;padding-right:11px}
+ .story-card{padding:20px 16px}
+ .nav .btn{padding:11px 17px}
+}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+
+<section class="hero" id="hero">
+  <div class="hero-card">
+    <div class="kicker">A little piece of our story</div>
+    <h1>Pattu Kutti ❤️</h1>
+    <p>365 Days of Us</p>
+    <div class="date">SEPTEMBER 2, 2025 → SEPTEMBER 2, 2026</div>
+    <p class="small">18 chapters. Countless memories. One beautiful us.</p>
+    <div class="controls">
+      <button class="btn" onclick="openStory()">💌 Tap to open your surprise</button>
+      <button class="btn secondary" onclick="toggleMusic()">🎵 Music</button>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="topbar">
+    <div class="progress"><i id="bar"></i></div>
+    <div class="nav">
+      <button class="btn secondary" id="prev" onclick="prevChapter()">← Back</button>
+      <span class="counter" id="counter">Chapter 1 of 18</span>
+      <button class="btn" id="next" onclick="nextChapter()">Next →</button>
+    </div>
+  </div>
+
+  <div id="chapters">
+    <article class="chapter active">
+      <div class="story-card">
+        <h2 class="chapter-title">Our Story ❤️</h2>
+        <div id="originalStory"><section class="page" id="p0">
+  <div class="card">
+    <div class="label">Chapter 1 • 1/18</div>
+    <div class="heart">♥</div>
+    <h1>Pattu Kutti ❤️</h1>
+    <h2>365 Days of Us</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">September 2, 2025 → September 2, 2026<br><br>Somewhere between our internship days and today, you became my person.<br><br>This is our first year. Our memories. Our love.</div>
+    <button onclick="nextPage()">Tap to begin ❤️</button>
+  </div>
+</section>
+<section class="page" id="p1">
+  <div class="card">
+    <div class="label">Chapter 2 • 2/18</div>
+    <div class="heart">♥</div>
+    <h1>Our Internship ❤️</h1>
+    <h2>Where our story quietly began</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">We met during our office internship. At that time, I didn't know that the girl I was spending time with would eventually become someone so important to me.<br><br>Then came August 10, 2025 — the day I came to know that you had feelings for me.<br><br>Something beautiful had started.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p2">
+  <div class="card">
+    <div class="label">Chapter 3 • 3/18</div>
+    <div class="heart">♥</div>
+    <h1>September 2, 2025 ❤️</h1>
+    <h2>The day everything changed</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">Our confession day. The day our story officially began.<br><br>That day I felt: “You are mine, and I'm yours.”<br><br>Holding your hand that day was something so simple, yet so special to me. I will always keep that moment close to my heart.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p3">
+  <div class="card">
+    <div class="label">Chapter 4 • 4/18</div>
+    <div class="heart">♥</div>
+    <h1>Little Moments 🥰</h1>
+    <h2>The memories only we understand</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">A few days after our confession, we were crossing the road. I held your shoulder and pulled you closer to me.<br><br>Maybe it was a small moment. But I remember it.<br><br>A hand held. A shoulder touched. A smile. A random conversation. A look between us.<br><br>Small moments that became unforgettable memories.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p4">
+  <div class="card">
+    <div class="label">Chapter 5 • 5/18</div>
+    <div class="heart">♥</div>
+    <h1>Our Firsts ❤️</h1>
+    <h2>First movie • First date • First hug</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">Our first movie as lovers felt different because I wasn't watching it with just someone. I was watching it with my girl. ❤️<br><br>Our first Sunday date was fun-filled and happy.<br><br>And our first hug in the park — a simple hug, but a memory I will never forget.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p5">
+  <div class="card">
+    <div class="label">Chapter 6 • 6/18</div>
+    <div class="heart">♥</div>
+    <h1>You Came Near My Home ❤️</h1>
+    <h2>Your care made me feel special</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">The day you came near my home to visit me is special.<br><br>Not just because you came, but because of the care you showed towards me.<br><br>I felt really special and loved.<br><br>Thank you so much, Pattu Kutti. ❤️</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p6">
+  <div class="card">
+    <div class="label">Chapter 7 • 7/18</div>
+    <div class="heart">♥</div>
+    <h1>Our Temple Memory 🛕</h1>
+    <h2>I was secretly happy the queue was long</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">I remember waiting in the queue.<br><br>Honestly, I was happy that the queue was taking some time because it gave me more time with you. ❤️<br><br>Standing with you, talking with you, being with you, and then dropping you back home — an ordinary day that became precious.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p7">
+  <div class="card">
+    <div class="label">Chapter 8 • 8/18</div>
+    <div class="heart">♥</div>
+    <h1>The Day I Met Your Parents ❤️</h1>
+    <h2>Another important part of your life</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">The day I came to your home and met your parents felt very special.<br><br>From two people who met during an internship to standing in front of each other's parents — our little love story was slowly becoming something much bigger.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p8">
+  <div class="card">
+    <div class="label">Chapter 9 • 9/18</div>
+    <div class="heart">♥</div>
+    <h1>The Day You Left India 🌎</h1>
+    <h2>Distance became real</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">I remember the day you left India and us.<br><br>We were late. You were nervous and scared about missing the flight. So many things were happening.<br><br>But somewhere in all that chaos, I just remember one thing:<br><br>I didn't want you to go.<br><br>India to the USA. Miles between us. But our love stayed right where it was. ❤️</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p9">
+  <div class="card">
+    <div class="label">Chapter 10 • 10/18</div>
+    <div class="heart">♥</div>
+    <h1>Learning To Love From A Distance 🌎❤️</h1>
+    <h2>Our first long-distance Valentine's Day</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">No meeting. No holding hands. No hug. Yet we celebrated.<br><br>We learned that love doesn't always need two people in the same place. Sometimes it needs only two people who still choose each other.<br><br>Distance changed our routine. It never changed my love for you.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p10">
+  <div class="card">
+    <div class="label">Chapter 11 • 11/18</div>
+    <div class="heart">♥</div>
+    <h1>My Quiet Favorite Memory 🥹</h1>
+    <h2>Watching you sleep</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">You put on the video and went to sleep.<br><br>And I stayed there, watching you sleep and admiring you quietly.<br><br>Nothing special was happening. Just you sleeping and me looking at you.<br><br>But somehow, it became one of my favorite memories.<br><br>Even watching you sleep makes me happy.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p11">
+  <div class="card">
+    <div class="label">Chapter 12 • 12/18</div>
+    <div class="heart">♥</div>
+    <h1>August 30, 2026 ❤️</h1>
+    <h2>Our first step towards forever</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">Our parents officially met for our marriage talk.<br><br>We started as two people meeting during an internship. Then came feelings, our confession, our first movie, our first date, our first hug, long distance — and now our families are coming together.<br><br>This isn't just our love story anymore. It's becoming our future. ❤️</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p12">
+  <div class="card">
+    <div class="label">Chapter 13 • 13/18</div>
+    <div class="heart">♥</div>
+    <h1>September 2, 2026 ❤️</h1>
+    <h2>Our 1st Love Anniversary</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">One whole year.<br><br>We've gone through happiness, arguments, small fights, misunderstandings, missing each other, distance, and so many beautiful moments.<br><br>But through all of it, we still choose each other.<br><br>Not because everything was perfect, but because even when things weren't perfect, we stayed.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p13">
+  <div class="card">
+    <div class="label">Chapter 14 • 14/18</div>
+    <div class="heart">♥</div>
+    <h1>Things I Love About You ❤️</h1>
+    <h2>Because you are mine</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">Your eyes.<br><br>The way you talk to me and take care of me.<br><br>The way you understand me so well and adjust with me.<br><br>Your cute expressions. 🥰<br><br>And honestly, everything about you — everything that comes from you and everything that makes you you.<br><br>I love everything.<br><br>Because you are my Pattu Kutti. ❤️</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p14">
+  <div class="card">
+    <div class="label">Chapter 15 • 15/18</div>
+    <div class="heart">♥</div>
+    <h1>The Truth Is... ❤️</h1>
+    <h2>I couldn't choose just one memory</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">Whenever I'm meeting you, it's memorable.<br><br>Whenever I'm talking with you, it's memorable.<br><br>Whenever we laugh, it's memorable.<br><br>Whenever we fight and make up, it's memorable.<br><br>So maybe I don't actually have a favorite memory.<br><br>With you, every day becomes a memory worth keeping. ❤️</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p15">
+  <div class="card">
+    <div class="label">Chapter 16 • 16/18</div>
+    <div class="heart">♥</div>
+    <h1>A Letter To My Pattu Kutti 💌</h1>
+    <h2>From my heart</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">My Pattu Kutti,<br><br>One year ago, on September 2nd, we started something that I never want to end.<br><br>I remember your hand in mine, pulling you closer while crossing the road, our first movie, our first Sunday date, our first hug in the park, you coming near my home, our temple visit, meeting your parents, the day you left India, our long-distance calls, and watching you sleep on video.<br><br>And now our parents have met and we're taking our first step towards our marriage.<br><br>We've had beautiful days, arguments, small fights and moments where things weren't easy. But through everything, we still choose each other.<br><br>I want to keep choosing you, understanding you, taking care of you, growing with you and loving you.<br><br>I don't know exactly what every day of our future will look like. But I know who I want beside me when I live those days.<br><br>You. My Pattu Kutti. ❤️<br><br>Thank you for coming into my life. Thank you for loving me, taking care of me, understanding me, and choosing me.<br><br>I love you. ❤️</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p16">
+  <div class="card">
+    <div class="label">Chapter 17 • 17/18</div>
+    <div class="heart">♥</div>
+    <h1>One Last Thing... 🎁</h1>
+    <h2>This is only Chapter 1</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">Our first year is not the end of our story.<br><br>It's only Chapter 1. ❤️<br><br>There are still so many things waiting for us — more movies, more dates, more hugs, more silly fights, more laughter, more photographs, more trips, more birthdays, more anniversaries.<br><br>And hopefully... no more long-distance.<br><br>Just you and me. Together. Building our life.</div>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+</section>
+<section class="page" id="p17">
+  <div class="card">
+    <div class="label">Forever • 18/18</div>
+    <div class="heart">♥</div>
+    <h1>PATTU KUTTI... ❤️</h1>
+    <h2>One year down... a lifetime to go.</h2>
+    <div class="divider">♡ ───────── ♡</div>
+    <div class="story">365 DAYS.<br><br>COUNTLESS MEMORIES.<br><br>ONE BEAUTIFUL LOVE STORY.<br><br>September 2, 2025 ❤️ was the day we became US.<br><br>September 2, 2026 ❤️ is our first anniversary.<br><br>And every day after this is another page of our story.<br><br>Whatever comes next, I want to experience it with you.<br><br>A LIFETIME TO GO. ❤️<br><br>Happy 1st Love Anniversary, Pattu Kutti.<br><br>I love you. ❤️</div>
+    <div class="forever">❤️ THE END OF CHAPTER 1 ❤️<br><br>Now the real story begins...</div>
+  </div>
+</section>
+</div>
+        <div class="photo-slot">📸 Add your favourite photo here later</div>
+      </div>
+    </article>
+  </div>
+
+  <div class="final" id="finalPage" style="display:none">
+    <div class="kicker">September 2, 2026</div>
+    <h2>One year down…<br>A lifetime to go. ❤️</h2>
+    <p>Thank you for every smile, every memory, every call, every hug we had — and every moment still waiting for us.</p>
+    <p>Happy 1st Love Anniversary, my Pattu Kutti. 🫶🏻</p>
+    <div class="controls">
+      <button class="btn" onclick="restart()">↻ Read it again</button>
+    </div>
+  </div>
+</section>
+
+<script>
+let chapter=1;
+const total=18;
+const hero=document.getElementById('hero');
+const story=document.getElementById('story');
+const finalPage=document.getElementById('finalPage');
+const originalStory=document.getElementById('originalStory');
+
+function openStory(){
+  hero.style.display='none';
+  story.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function update(){
+  document.getElementById('counter').textContent=`Chapter ${chapter} of ${total}`;
+  document.getElementById('bar').style.width=(chapter/total*100)+'%';
+  document.getElementById('prev').disabled=chapter===1;
+  document.getElementById('prev').style.opacity=chapter===1?.45:1;
+  if(chapter===total){
+    document.getElementById('next').textContent='Finish ❤️';
+  }else document.getElementById('next').textContent='Next →';
+}
+function nextChapter(){
+  if(chapter<total){chapter++; update(); window.scrollTo({top:0,behavior:'smooth'});}
+  else { document.querySelector('#chapters').style.display='none'; finalPage.style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+}
+function prevChapter(){
+  if(chapter>1){chapter--; update(); window.scrollTo({top:0,behavior:'smooth'});}
+}
+function restart(){
+  chapter=1; document.querySelector('#chapters').style.display='block'; finalPage.style.display='none'; update(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMusic(){
+  // Browser-safe: music cannot autoplay without a user-provided audio file.
+  alert('Music is ready for a song file. Add your MP3 as "music.mp3" beside index.html, then I can wire it to play here.');
+}
+function makeHeart(){
+  const h=document.createElement('span'); h.className='heart'; h.textContent=['❤️','💕','💗','💖'][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+'%'; h.style.animationDuration=(7+Math.random()*6)+'s'; h.style.fontSize=(12+Math.random()*16)+'px';
+  document.getElementById('hearts').appendChild(h); setTimeout(()=>h.remove(),14000);
+}
+setInterval(makeHeart,850);
+update();
+</script>
+</body>
+</html>
