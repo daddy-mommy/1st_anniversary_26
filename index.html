@@ -156,6 +156,13 @@ button:disabled{opacity:.35;pointer-events:none}
   transition:transform .5s ease;
 }
 .memory-photo:hover img{transform:scale(1.04)}
+.animated-memory img{animation:memoryKenBurns 9s ease-in-out infinite alternate}
+@keyframes memoryKenBurns{from{transform:scale(1)}to{transform:scale(1.045)}}
+.music-control{pointer-events:auto;display:flex;align-items:center;gap:8px}
+.music-btn{border:1px solid rgba(255,255,255,.22);background:rgba(28,15,31,.88);color:#ffe5ef;border-radius:999px;padding:8px 11px;font:700 12px system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(10px)}
+.music-range{width:74px;accent-color:#ff6f9f}
+.end-video{width:min(760px,100%);margin:28px auto 0;border-radius:24px;border:1px solid rgba(255,255,255,.25);box-shadow:0 20px 60px rgba(0,0,0,.4);display:block;background:#000}
+.end-note{font:700 12px system-ui,sans-serif;letter-spacing:1.5px;color:#ffd0e1;text-transform:uppercase;margin-top:22px}
 .memory-photo figcaption{
   padding:10px 12px;
   color:#ffe4ee;
@@ -213,8 +220,10 @@ button:disabled{opacity:.35;pointer-events:none}
 <section id="app">
   <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
   <div class="topbar">
-    <span class="pill" id="counter">01 / 18</span>
-    <span class="pill">Swipe ↑ / ↓</span>
+    <div class="music-control">
+      <button class="music-btn" id="musicBtn" onclick="toggleMusic()">♫ Music</button>
+      <input class="music-range" id="volume" type="range" min="0" max="1" step="0.05" value="0.55" aria-label="Music volume" oninput="setVolume(this.value)">
+    </div>
   </div>
 
   <main id="chapters">
@@ -222,7 +231,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-0" data-index="0">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 1 • 1/18</span>
           <span class="chapter-icon">❤️</span>
         </div>
         <h1>Pattu Kutti ❤️</h1>
@@ -247,7 +255,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-1" data-index="1">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 2 • 2/18</span>
           <span class="chapter-icon">🏢</span>
         </div>
         <h1>Our Internship ❤️</h1>
@@ -272,7 +279,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-2" data-index="2">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 3 • 3/18</span>
           <span class="chapter-icon">💞</span>
         </div>
         <h1>September 2, 2025 ❤️</h1>
@@ -280,8 +286,8 @@ button:disabled{opacity:.35;pointer-events:none}
         <div class="divider">♡ ───────── ♡</div>
         <div class="story">Our confession day. The day our story officially began.<br><br>That day I felt: “You are mine, and I'm yours.”<br><br>Holding your hand that day was something so simple, yet so special to me. I will always keep that moment close to my heart.</div>
 
-<div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo">
-          <img src="photos/first_rose.jpg" alt="Our memory — first rose" loading="lazy">
+<div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo animated-memory">
+          <img src="photos/chapter3_proposal.jpg" alt="Animated proposal moment at Kathipara Cafe" loading="lazy">
         </figure></div>
 <div class="chapter-nav">
           <button class="nav-btn prev" onclick="goToChapter(1)" >← Previous</button>
@@ -295,7 +301,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-3" data-index="3">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 4 • 4/18</span>
           <span class="chapter-icon">🥰</span>
         </div>
         <h1>Little Moments 🥰</h1>
@@ -320,7 +325,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-4" data-index="4">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 5 • 5/18</span>
           <span class="chapter-icon">🎬</span>
         </div>
         <h1>Our Firsts ❤️</h1>
@@ -349,7 +353,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-5" data-index="5">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 6 • 6/18</span>
           <span class="chapter-icon">🏡</span>
         </div>
         <h1>You Came Near My Home ❤️</h1>
@@ -372,7 +375,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-6" data-index="6">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 7 • 7/18</span>
           <span class="chapter-icon">🛕</span>
         </div>
         <h1>Our Temple Memory 🛕</h1>
@@ -380,8 +382,8 @@ button:disabled{opacity:.35;pointer-events:none}
         <div class="divider">♡ ───────── ♡</div>
         <div class="story">I remember waiting in the queue.<br><br>Honestly, I was happy that the queue was taking some time because it gave me more time with you. ❤️<br><br>Standing with you, talking with you, being with you, and then dropping you back home — an ordinary day that became precious.</div>
 
-<div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo">
-          <img src="photos/first_rose.jpg" alt="Our memory — first rose" loading="lazy">
+<div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo animated-memory">
+          <img src="photos/temple_queue_animated.jpg" alt="Animated memory of us waiting together in the Vadapalani Murugan Temple queue" loading="lazy">
         </figure></div>
 <div class="chapter-nav">
           <button class="nav-btn prev" onclick="goToChapter(5)" >← Previous</button>
@@ -395,7 +397,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-7" data-index="7">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 8 • 8/18</span>
           <span class="chapter-icon">👨‍👩‍👧</span>
         </div>
         <h1>The Day I Met Your Parents ❤️</h1>
@@ -418,7 +419,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-8" data-index="8">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 9 • 9/18</span>
           <span class="chapter-icon">✈️</span>
         </div>
         <h1>The Day You Left India 🌎</h1>
@@ -427,7 +427,7 @@ button:disabled{opacity:.35;pointer-events:none}
         <div class="story">I remember the day you left India and us.<br><br>We were late. You were nervous and scared about missing the flight. So many things were happening.<br><br>But somewhere in all that chaos, I just remember one thing:<br><br>I didn't want you to go.<br><br>India to the USA. Miles between us. But our love stayed right where it was. ❤️</div>
 
 <div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo">
-          <img src="photos/man_name_order_fun.png" alt="Our memory — man name order fun" loading="lazy">
+          <img src="photos/airport_bye.png" alt="Our airport goodbye memory" loading="lazy">
         </figure></div>
 <div class="chapter-nav">
           <button class="nav-btn prev" onclick="goToChapter(7)" >← Previous</button>
@@ -441,7 +441,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-9" data-index="9">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 10 • 10/18</span>
           <span class="chapter-icon">🌎</span>
         </div>
         <h1>Learning To Love From A Distance 🌎❤️</h1>
@@ -466,7 +465,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-10" data-index="10">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 11 • 11/18</span>
           <span class="chapter-icon">🥹</span>
         </div>
         <h1>My Quiet Favorite Memory 🥹</h1>
@@ -489,7 +487,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-11" data-index="11">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 12 • 12/18</span>
           <span class="chapter-icon">💍</span>
         </div>
         <h1>August 30, 2026 ❤️</h1>
@@ -497,8 +494,8 @@ button:disabled{opacity:.35;pointer-events:none}
         <div class="divider">♡ ───────── ♡</div>
         <div class="story">Our parents officially met for our marriage talk.<br><br>We started as two people meeting during an internship. Then came feelings, our confession, our first movie, our first date, our first hug, long distance — and now our families are coming together.<br><br>This isn't just our love story anymore. It's becoming our future. ❤️</div>
 
-<div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo">
-          <img src="photos/man_name_order_fun.png" alt="Our memory — man name order fun" loading="lazy">
+<div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo animated-memory">
+          <img src="photos/family_marriage_talk_animated.jpg" alt="Animated first marriage talk between our families with her on video call" loading="lazy">
         </figure></div>
 <div class="chapter-nav">
           <button class="nav-btn prev" onclick="goToChapter(10)" >← Previous</button>
@@ -512,7 +509,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-12" data-index="12">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 13 • 13/18</span>
           <span class="chapter-icon">🎉</span>
         </div>
         <h1>September 2, 2026 ❤️</h1>
@@ -537,7 +533,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-13" data-index="13">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 14 • 14/18</span>
           <span class="chapter-icon">💕</span>
         </div>
         <h1>Things I Love About You ❤️</h1>
@@ -562,7 +557,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-14" data-index="14">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 15 • 15/18</span>
           <span class="chapter-icon">📖</span>
         </div>
         <h1>The Truth Is... ❤️</h1>
@@ -587,7 +581,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-15" data-index="15">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 16 • 16/18</span>
           <span class="chapter-icon">💌</span>
         </div>
         <h1>A Letter To My Pattu Kutti 💌</h1>
@@ -610,18 +603,15 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-16" data-index="16">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Chapter 17 • 17/18</span>
           <span class="chapter-icon">🎁</span>
         </div>
         <h1>One Last Thing... 🎁</h1>
-        <h2>This is only Chapter 1</h2>
+        <h2>This is only the beginning</h2>
         <div class="divider">♡ ───────── ♡</div>
-        <div class="story">Our first year is not the end of our story.<br><br>It's only Chapter 1. ❤️<br><br>There are still so many things waiting for us — more movies, more dates, more hugs, more silly fights, more laughter, more photographs, more trips, more birthdays, more anniversaries.<br><br>And hopefully... no more long-distance.<br><br>Just you and me. Together. Building our life.</div>
+        <div class="story">Our first year is not the end of our story.<br><br>It's only the beginning. ❤️<br><br>There are still so many things waiting for us — more movies, more dates, more hugs, more silly fights, more laughter, more photographs, more trips, more birthdays, more anniversaries.<br><br>And hopefully... no more long-distance.<br><br>Just you and me. Together. Building our life.</div>
 
-<div class="memory-heading">A little piece of this memory 📸</div><div class="memory-gallery"><figure class="memory-photo">
-          <img src="photos/first_rose.jpg" alt="Our memory — first rose" loading="lazy">
-        </figure><figure class="memory-photo">
-          <img src="photos/jasmine.jpg" alt="Our memory — jasmine" loading="lazy">
+<div class="memory-heading">A glimpse of our future 🌅</div><div class="memory-gallery"><figure class="memory-photo animated-memory">
+          <img src="photos/future_together_animated.jpg" alt="Animated future memory of us sitting together watching the evening sun" loading="lazy">
         </figure></div>
 <div class="chapter-nav">
           <button class="nav-btn prev" onclick="goToChapter(15)" >← Previous</button>
@@ -635,7 +625,6 @@ button:disabled{opacity:.35;pointer-events:none}
     <section class="chapter" id="chapter-17" data-index="17">
       <div class="chapter-inner">
         <div class="chapter-top">
-          <span class="chapter-label">Forever • 18/18</span>
           <span class="chapter-icon">♾️</span>
         </div>
         <h1>PATTU KUTTI... ❤️</h1>
@@ -664,7 +653,7 @@ button:disabled{opacity:.35;pointer-events:none}
   </main>
 </section>
 
-
+<audio id="bgMusic" src="media/Kadhaippoma.mp3" loop preload="auto"></audio>
 
 <section id="end">
   <div class="end-card">
@@ -672,6 +661,8 @@ button:disabled{opacity:.35;pointer-events:none}
     <h1>One year down…<br>A lifetime to go. ❤️</h1>
     <p>Thank you for every smile, every memory, every call, every hug — and every moment still waiting for us.</p>
     <p><b>Happy 1st Love Anniversary, my Pattu Kutti. 🫶🏻</b></p>
+    <div class="end-note">A little video memory for you ❤️</div>
+    <video class="end-video" id="memoryVideo" controls playsinline preload="metadata" src="media/anniversary_video.mp4"></video>
     <button class="replay" onclick="location.reload()">↻ Relive our story</button>
   </div>
 </section>
@@ -679,20 +670,30 @@ button:disabled{opacity:.35;pointer-events:none}
 <script>
 const chaptersEl = document.getElementById('chapters');
 const chapterEls = [...document.querySelectorAll('.chapter')];
-const counter = document.getElementById('counter');
 const progressBar = document.getElementById('progressBar');
 const photoInput = document.getElementById('photoInput');
 let current = 0;
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
 function startStory() {
   document.getElementById('intro').style.display = 'none';
   document.getElementById('app').style.display = 'block';
+  bgMusic.volume = 0.55;
+  bgMusic.play().catch(()=>{});
+  musicBtn.textContent = '♫ Playing';
   goToChapter(0);
 }
+function toggleMusic(){
+  if(bgMusic.paused){ bgMusic.play().catch(()=>{}); musicBtn.textContent='♫ Playing'; }
+  else { bgMusic.pause(); musicBtn.textContent='♫ Music'; }
+}
+function setVolume(v){ bgMusic.volume = Number(v); }
 
 function goToChapter(index) {
   if (index < 0) index = 0;
   if (index >= chapterEls.length) {
     document.getElementById('app').style.display = 'none';
+    bgMusic.pause();
     document.getElementById('end').style.display = 'grid';
     return;
   }
@@ -702,7 +703,6 @@ function goToChapter(index) {
 }
 
 function updateProgress(index) {
-  counter.textContent = String(index + 1).padStart(2,'0') + ' / 18';
   progressBar.style.width = (((index + 1) / 18) * 100) + '%';
 }
 
